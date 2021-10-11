@@ -2232,3 +2232,22 @@ fn slice_split_array_mut_out_of_bounds() {
 
     v.split_array_mut::<7>();
 }
+
+fn test_slice_from_ptr_range() {
+    let arr = [1, 2, 3];
+    let range = arr.as_ptr_range();
+    unsafe {
+        assert_eq!(slice::from_ptr_range(range), &arr);
+    }
+
+    let mut arr = ["foo".to_owned(), "bar".to_owned()];
+    let range = arr.as_mut_ptr_range();
+    unsafe {
+        assert_eq!(slice::from_mut_ptr_range(range), &arr);
+    }
+
+    let range: Range<*const Vec<String>> = [].as_ptr_range();
+    unsafe {
+        assert_eq!(slice::from_ptr_range(range), &[] as &[Vec<String>]);
+    }
+}
