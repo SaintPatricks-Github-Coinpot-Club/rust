@@ -69,7 +69,7 @@ pub use raw::{from_raw_parts, from_raw_parts_mut};
 #[stable(feature = "from_ref", since = "1.28.0")]
 pub use raw::{from_mut, from_ref};
 
-#[unstable(feature = "slice_from_ptr_range", issue = "none")]
+#[unstable(feature = "slice_from_ptr_range", issue = "89792")]
 pub use raw::{from_mut_ptr_range, from_ptr_range};
 
 // This function is public only because there is no other way to unit test heapsort.

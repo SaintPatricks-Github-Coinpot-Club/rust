@@ -231,7 +231,7 @@ pub const fn from_mut<T>(s: &mut T) -> &mut [T] {
 /// ```
 ///
 /// [valid]: ptr#safety
-#[unstable(feature = "slice_from_ptr_range", issue = "none")]
+#[unstable(feature = "slice_from_ptr_range", issue = "89792")]
 pub unsafe fn from_ptr_range<'a, T>(range: Range<*const T>) -> &'a [T] {
     // SAFETY: the caller must uphold the safety contract for `from_ptr_range`.
     unsafe { from_raw_parts(range.start, range.end.offset_from(range.start) as usize) }
@@ -280,7 +280,7 @@ pub unsafe fn from_ptr_range<'a, T>(range: Range<*const T>) -> &'a [T] {
 /// ```
 ///
 /// [valid]: ptr#safety
-#[unstable(feature = "slice_from_ptr_range", issue = "none")]
+#[unstable(feature = "slice_from_ptr_range", issue = "89792")]
 pub unsafe fn from_mut_ptr_range<'a, T>(range: Range<*mut T>) -> &'a mut [T] {
     // SAFETY: the caller must uphold the safety contract for `from_mut_ptr_range`.
     unsafe { from_raw_parts_mut(range.start, range.end.offset_from(range.start) as usize) }
