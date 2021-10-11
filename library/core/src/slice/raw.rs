@@ -1,8 +1,6 @@
 //! Free functions to create `&[T]` and `&mut [T]`.
 
 use crate::array;
-use crate::intrinsics::is_aligned_and_not_null;
-use crate::mem;
 use crate::ops::Range;
 use crate::ptr;
 
@@ -195,7 +193,8 @@ pub const fn from_mut<T>(s: &mut T) -> &mut [T] {
 ///   to the first element of a slice.
 ///
 /// * The `end` pointer must be a [valid] and properly aligned pointer to *one past*
-///   the last element.
+///   the last element, such that the offset from the end to the start pointer is
+///   the length of the slice.
 ///
 /// * The range must contain `N` consecutive properly initialized values of type `T`:
 ///
@@ -251,7 +250,8 @@ pub unsafe fn from_ptr_range<'a, T>(range: Range<*const T>) -> &'a [T] {
 ///   to the first element of a slice.
 ///
 /// * The `end` pointer must be a [valid] and properly aligned pointer to *one past*
-///   the last element.
+///   the last element, such that the offset from the end to the start pointer is
+///   the length of the slice.
 ///
 /// * The range must contain `N` consecutive properly initialized values of type `T`:
 ///
@@ -274,7 +274,7 @@ pub unsafe fn from_ptr_range<'a, T>(range: Range<*const T>) -> &'a [T] {
 ///
 /// use core::slice;
 ///
-/// let x = [1, 2, 3];
+/// let mut x = [1, 2, 3];
 /// let range = x.as_mut_ptr_range();
 ///
 /// unsafe {

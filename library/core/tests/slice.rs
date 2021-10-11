@@ -2234,6 +2234,7 @@ fn slice_split_array_mut_out_of_bounds() {
     v.split_array_mut::<7>();
 }
 
+#[test]
 fn test_slice_from_ptr_range() {
     let arr = ["foo".to_owned(), "bar".to_owned()];
     let range = arr.as_ptr_range();
